@@ -1,0 +1,96 @@
+<div class="container container-fluid pt-3">
+  <app-detail-modal></app-detail-modal>
+  <app-add-modal></app-add-modal>
+
+  <div class="nav navbar navbar-light justify-content-between d-flex">
+    <a href="/">
+      <img
+        class="logo navbar-brand"
+        src="https://www.i-pic.info/i/kI2g196318.png"
+      />
+    </a>
+
+    <div class="me-3">
+      <!-- <button
+        class="btn btn-outline-success"
+        #popupbtn
+        id="popupbtn"
+        (click)="open()"
+      >
+        Add Queue
+      </button> -->
+      <div ngbDropdown class="d-inline mt-3">
+        <button
+          type="button"
+          class="btn btn-outline-success"
+          id="dropdown1"
+          ngbDropdownToggle
+        >
+          Select Type
+        </button>
+        <div ngbDropdownMenu aria-labelledby="dropdown1">
+          <!-- items as buttons -->
+          <button ngbDropdownItem (click)="getQueues()">All</button>
+          <button ngbDropdownItem (click)="getQueues('A')">A</button>
+          <button ngbDropdownItem (click)="getQueues('B')">B</button>
+          <button ngbDropdownItem (click)="getQueues('C')">C</button>
+          <button ngbDropdownItem (click)="getQueues('D')">D</button>
+        </div>
+      </div>
+      <button
+        class="btn btn-outline-success mx-3"
+        #popupbtn
+        id="popupbtn"
+        (click)="open()"
+      >
+        Add Queue
+      </button>
+      <button class="btn btn-outline-danger" (click)="clearQueue()">
+        Clear Queues
+      </button>
+    </div>
+  </div>
+
+  <hr />
+
+  <table class="table table-responsive table-strip text-center fw-bold">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Current</th>
+        <th>Time</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="let item of dataList"
+        [ngClass]="{
+          'bg-A': item.Type === 'A',
+          'bg-B': item.Type === 'B',
+          'bg-C': item.Type === 'C',
+          'bg-D': item.Type === 'D'
+        }"
+      >
+        <td>
+          <img [src]="getTypeIcon(item.Type)" width="30rem" />
+        </td>
+        <td>{{ item.Code }}</td>
+        <td>{{ getTimeString(item.Date) }}</td>
+        <td>
+          <button
+            class="btn btn-outline-success bi bi-clipboard-check me-3"
+            (click)="showData(item.Code)"
+          ></button>
+          <button
+            class="btn btn-outline-danger bi bi-x"
+            (click)="deQueue(item.Code)"
+          ></button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div *ngIf="dataList.length == 0" class="mt-5 text-center">
+    <h4>No data, Please add queue</h4>
+  </div>
+</div>
