@@ -14,6 +14,7 @@ import { DetailModalComponent } from '../detail-modal/detail-modal.component';
 export class WebAdminComponent implements OnInit {
   //dataList = MOCKUP;
   private updateSubscription!: Subscription;
+  selectedType: string = '';
   dataList: any = [];
   tempData: PostQueue = { type: '', name: '', tel: '' };
   saveResponse: any;
@@ -34,12 +35,14 @@ export class WebAdminComponent implements OnInit {
   getQueues(code?: string) {
     console.log(code);
     if (code) {
+      this.selectedType = code;
       this.service.getQueues(code).subscribe((result) => {
         console.log(result);
         this.dataList = result.data;
         console.log(this.dataList);
       });
-    } else {
+    } else if (code == '' || code == undefined) {
+      this.selectedType = '';
       this.service.getQueues().subscribe((result) => {
         console.log(result);
         this.dataList = result.data;
@@ -80,7 +83,7 @@ export class WebAdminComponent implements OnInit {
   open() {
     this.addQueue.open();
     this.clearList(this.dataList);
-    this.getQueues();
+    this.getQueues(this.selectedType);
   }
   getTimeString(date: string) {
     return new Date(date).toLocaleTimeString('th');
@@ -98,9 +101,9 @@ export class WebAdminComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.updateSubscription = interval(5000).subscribe((val) =>
-      this.getQueues()
-    );
-    // this.getQueues();
+    // this.updateSubscription = interval(10 * 1000).subscribe((val) =>
+    //   this.getQueues(this.selectedType)
+    // );
+    this.getQueues(this.selectedType);
   }
 }
