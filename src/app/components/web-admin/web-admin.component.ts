@@ -22,9 +22,9 @@ export class WebAdminComponent implements OnInit {
   @ViewChild(DetailModalComponent) viewDetail!: DetailModalComponent;
   @ViewChild(AddModalComponent) addQueue!: AddModalComponent;
   constructor(private service: MasterService) {
-    this.getQueues();
+    this.getQueues(this.selectedType);
     this.service.RefreshRequired.subscribe((result) => {
-      this.getQueues();
+      this.getQueues(this.selectedType);
     });
   }
 
@@ -57,7 +57,7 @@ export class WebAdminComponent implements OnInit {
         if (result.message === 'Deleted') {
           console.log(result.data);
           alert(`${code} has been deleted`);
-          this.getQueues();
+          this.getQueues(this.selectedType);
         }
       });
     }
@@ -74,11 +74,7 @@ export class WebAdminComponent implements OnInit {
       });
     });
     this.clearList(this.dataList);
-    this.getQueues();
-
-    // this.dataList.forEach((item: any) => {
-    //   this.deQueue(item.Code)
-    // };
+    this.getQueues(this.selectedType);
   }
   open() {
     this.addQueue.open();

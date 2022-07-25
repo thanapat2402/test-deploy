@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CustomerService } from 'src/app/service/customer.service';
 
 @Component({
   selector: 'app-web-customer',
