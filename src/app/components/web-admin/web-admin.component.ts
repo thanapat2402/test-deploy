@@ -62,6 +62,18 @@ export class WebAdminComponent implements OnInit {
       });
     }
   }
+  acceptQueue(code: string) {
+    if (confirm(`Do you want to dequeue ${code}?`)) {
+      this.service.acceptQueue(code).subscribe((result) => {
+        console.log(result);
+        if (result.message === 'Deleted') {
+          console.log(result.data);
+          alert(`${code} has been reserved`);
+          this.getQueues(this.selectedType);
+        }
+      });
+    }
+  }
   clearList(list: any) {
     list = [];
   }
