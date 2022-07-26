@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { interval } from 'rxjs';
 import { TotalQueue } from 'src/app/models/customer';
 import { CustomerService } from 'src/app/service/customer.service';
 
@@ -18,6 +19,7 @@ export class WebCustomerComponent implements OnInit {
     CurrentqueueC: '',
     CurrentqueueD: '',
   };
+  updateSubscription: any;
   constructor(private service: CustomerService) {}
   getTotalQueue() {
     this.service.getAmountQueue().subscribe((result) => {
@@ -26,6 +28,8 @@ export class WebCustomerComponent implements OnInit {
     });
   }
   ngOnInit(): void {
-    this.getTotalQueue();
+    this.updateSubscription = interval(10 * 1000).subscribe((val) =>
+      this.getTotalQueue()
+    );
   }
 }

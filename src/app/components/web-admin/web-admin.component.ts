@@ -97,9 +97,9 @@ export class WebAdminComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.updateSubscription = interval(10 * 1000).subscribe((val) =>
-    //   this.getQueues(this.selectedType)
-    // );
+    this.updateSubscription = interval(10 * 1000).subscribe((val) =>
+      this.getQueues(this.selectedType)
+    );
     this.getQueues(this.selectedType);
   }
 }
