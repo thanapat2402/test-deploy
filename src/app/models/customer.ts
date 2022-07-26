@@ -3,8 +3,8 @@ export interface TotalQueue {
   AmountQueueB: String;
   AmountQueueC: String;
   AmountQueueD: String;
-  CurrentqueueA: String;
-  CurrentqueueB: String;
-  CurrentqueueC: String;
-  CurrentqueueD: String;
+  CurrentQueueA: String;
+  CurrentQueueB: String;
+  CurrentQueueC: String;
+  CurrentQueueD: String;
 }
