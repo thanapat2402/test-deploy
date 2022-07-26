@@ -14,10 +14,10 @@ export class WebCustomerComponent implements OnInit {
     AmountQueueB: '',
     AmountQueueC: '',
     AmountQueueD: '',
-    CurrentqueueA: '',
-    CurrentqueueB: '',
-    CurrentqueueC: '',
-    CurrentqueueD: '',
+    CurrentQueueA: '',
+    CurrentQueueB: '',
+    CurrentQueueC: '',
+    CurrentQueueD: '',
   };
   updateSubscription: any;
   constructor(private service: CustomerService) {}
