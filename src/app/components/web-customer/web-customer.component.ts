@@ -31,5 +31,6 @@ export class WebCustomerComponent implements OnInit {
     this.updateSubscription = interval(10 * 1000).subscribe((val) =>
       this.getTotalQueue()
     );
+    this.getTotalQueue();
   }
 }
